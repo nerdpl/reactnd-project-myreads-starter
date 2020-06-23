@@ -7,7 +7,7 @@ import SearchBooks from './SearchBooks'
 
 class BooksApp extends React.Component {
   state = {
-    books: []    
+    books: [],
   }
 
   componentDidMount() {
@@ -19,15 +19,11 @@ class BooksApp extends React.Component {
       })
   }
 
-  searchBooks = (query)=> {
-    BooksAPI.search(query)
-  }
-
   render() {
     return (
       <div>
         <Route exact path='/' render={()=> (
-          <BookCase books={this.state.books}/>
+          <BookCase books={ this.state.books }/>
         )} />
         <Route path='/search' render={()=> (
           <SearchBooks />
