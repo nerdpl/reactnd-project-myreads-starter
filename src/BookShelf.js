@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 
 class BookShelf extends Component {
 
   render() {
     const listBooks = this.props.books.filter((book)=> (
-        book.shelf === this.props.shelfName
+        book.shelf === this.props.shelf
     ))
-    
-    console.log(listBooks)
     
     return(
       <div className="bookshelf">
@@ -16,10 +13,10 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {listBooks.map((book)=> (
-                <li>
+                <li key={book.id}>
                 <div className="book">
                     <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: 'url(' + book.bookCover + ')'}}></div>
+                    <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: 'url(' + book.imageLinks.smallThumbnail + ')'}}></div>
                     <div className="book-shelf-changer">
                         <select>
                         <option value="move" disabled>Move to...</option>
@@ -31,7 +28,12 @@ class BookShelf extends Component {
                     </div>
                     </div>
                     <div className="book-title">{ book.title }</div>
-                    <div className="book-authors">{ book.authors }</div>
+                    <div className="book-authors">{ book.authors.length > 1 
+                        ? book.authors.map((author, index)=> (index !== book.authors.length - 1 
+                            ? author + ', '
+                            : author )) 
+                        : book.authors.map((author)=> author)}
+                    </div>
                 </div>
                 </li>
             ))}
