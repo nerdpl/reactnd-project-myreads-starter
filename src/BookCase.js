@@ -11,9 +11,9 @@ class BookCase extends Component {
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          <BookShelf books={this.props.books} shelf={'currentlyReading'} shelfName={'Currently Reading'} />
-          <BookShelf books={this.props.books} shelf={'wantToRead'} shelfName={'Want To Read'} />
-          <BookShelf books={this.props.books} shelf={'read'} shelfName={'Read'} />
+          <BookShelf books={this.props.books} shelf={'currentlyReading'} shelfName={'Currently Reading' } onShelfChange={ this.props.onShelfChange } />
+          <BookShelf books={this.props.books} shelf={'wantToRead'} shelfName={'Want To Read'} onShelfChange={ this.props.onShelfChange } />
+          <BookShelf books={this.props.books} shelf={'read'} shelfName={'Read'} onShelfChange={ this.props.onShelfChange } />
         </div>
         <div className="open-search">
           <Link className='open-search' to='/search'>Add a book</Link>

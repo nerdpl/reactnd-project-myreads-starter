@@ -12,7 +12,7 @@ class SearchBooks extends Component {
   handleSearch = (q)=> {
     this.setState(()=> ({query: q}))
     q === '' && this.setState(()=> ({ searchResults: [] }))
-    q !== '' && BooksAPI.search(q, 5)
+    q !== '' && BooksAPI.search(q)
       .then((results)=> {
         this.setState(()=> ({
           searchResults: results
@@ -34,7 +34,7 @@ class SearchBooks extends Component {
           <ol className="books-grid">
             {this.state.searchResults.length > 0 && this.state.searchResults.map((book)=> (
               <li key={ book.id }>
-                <Book book={ book }/>
+                <Book book={ book } onShelfChange={ this.props.onShelfChange } />
               </li>
             ))}
           </ol>
