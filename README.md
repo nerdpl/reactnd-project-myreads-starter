@@ -40,6 +40,7 @@ SEARCH_TERMS.md
 
 Install all the project dependencies with
 - npm install
+
 Start the project with
 - npm start
 
