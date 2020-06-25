@@ -13,9 +13,7 @@ class BooksApp extends React.Component {
   componentDidMount() {
     BooksAPI.getAll()
       .then((results)=> {
-        this.setState(()=> ({
-          books: results
-        }))
+        this.setState(()=> ({ books: results }))
       })
   }
   
@@ -29,9 +27,7 @@ class BooksApp extends React.Component {
               if (book.id === results.id) book.shelf = results.shelf
               return book
             })
-            this.setState(()=> ({
-              books: newState
-            }))
+            this.setState(()=> ({ books: newState }))
           })
       })
   }

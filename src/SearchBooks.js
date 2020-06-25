@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
+import { debounce } from 'debounce'
 
 class SearchBooks extends Component {
   state = {
@@ -10,11 +12,15 @@ class SearchBooks extends Component {
   }
 
   handleSearch = (q)=> {
-    this.setState(()=> ({query: q}))
+    this.setState(()=> ({ query: q }))
+    debounce(this.getSearchResults(q), 1000)
+  }
+
+  getSearchResults = (q)=> {
     q === '' && this.setState(()=> ({ searchResults: [] }))
     q !== '' && BooksAPI.search(q)
       .then((results)=> {
-        this.setState(()=> ({
+        if (results.length > 0) this.setState(()=> ({
           searchResults: results
         }))
       })
@@ -32,16 +38,20 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.searchResults.length > 0 && this.state.searchResults.map((book)=> (
+            { this.state.searchResults.length > 0 && this.state.searchResults.map((book)=> (
               <li key={ book.id }>
                 <Book book={ book } onShelfChange={ this.props.onShelfChange } />
               </li>
-            ))}
+            )) }
           </ol>
         </div>
       </div>
     )
   }
+}
+
+SearchBooks.propTypes = {
+    onShelfChange: PropTypes.func.isRequired
 }
 
 export default SearchBooks
