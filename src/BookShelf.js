@@ -11,14 +11,14 @@ class BookShelf extends Component {
     
     return(
       <div className="bookshelf">
-        <h2 className="bookshelf-title">{this.props.shelfName}</h2>
+        <h2 className="bookshelf-title">{ this.props.shelfName }</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {listBooks.map((book)=> (
-              <li key={book.id}>
+            { listBooks.map((book)=> (
+              <li key={ book.id }>
                 <Book book={ book } onShelfChange={ this.props.onShelfChange } />    
               </li>
-            ))}
+            )) }
           </ol>
         </div>
       </div>
@@ -27,7 +27,7 @@ class BookShelf extends Component {
 }
 
 BookShelf.propTypes = {
-    book: PropTypes.object.isRequired,
+    book: PropTypes.object,
     shelf: PropTypes.string.isRequired,
     shelfName: PropTypes.string.isRequired,
     onShelfChange: PropTypes.func.isRequired
